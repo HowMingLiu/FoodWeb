@@ -1,3 +1,6 @@
+import { APIURL } from "./APIconfig.js";
+
+// 首頁 menu 選項
 let oMenu = document.querySelector(".menu");
 let oUl = document.querySelector(".logo ul");
 let oLogo = document.querySelector(".logo");
@@ -14,4 +17,19 @@ oMenu.onclick = function(){
 
 function getStyle(node, cssStyle){
   return node.currentStyle ? node.currentStyle[cssStyle] : getComputedStyle(node)[cssStyle];
+}
+
+
+// 登出按鈕提示
+let oLogout = document.getElementById('logoutBtn');
+if(oLogout){
+  oLogout.onclick = function(e) {
+    e.preventDefault();
+    let reply = confirm("您是否要登出？");
+      if(reply){
+        window.location.replace(`${APIURL}account/logout`);
+      }else {
+        return;
+      }
+  }
 }

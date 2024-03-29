@@ -26,7 +26,7 @@ fetch(`${APIURL}menu`, {method: "GET"})
         // 購物車內的商品
         let shoppingCartData = res.data || [];  // 購物車內的商品
         // console.log(shoppingCartData);
-
+        
         // 左側分類的選項
         setOption(data, dataOption, dataTemp);
 

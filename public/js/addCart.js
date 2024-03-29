@@ -62,34 +62,12 @@ export function addCart(shoppingCartData, dataTemp) {
       })
       oCart.innerHTML = cartImgCount;
 
-      // 添加動畫
-      let animateCard = target.parentNode.parentNode.querySelector("img").cloneNode(true);
-      oCard.appendChild(animateCard);
-      // 取得購物車小圖示的座標
-      let oCartImgLeft = oCartImg.offsetLeft + oCartImg.parentNode.offsetLeft
-      let oCartImgTop = oCartImg.offsetTop + oCartImg.parentNode.offsetTop
-
-      // 設置新添加的圖片初始位置與原圖片位置相同
-      animateCard.style.position = "absolute"
-      animateCard.style.left = target.parentNode.parentNode.offsetLeft + "px"
-      animateCard.style.top = target.parentNode.parentNode.offsetTop + "px"
-      animateCard.style.width = "150px"
-      animateCard.style.height = "150px"
-      animateCard.style.borderRadius = "750px"
-      starMove(animateCard, {
-        width: 20,
-        height: 20,
-        left: oCartImgLeft,
-        top: oCartImgTop,
+      // 購物車小動畫
+      starMove(oCartImg, {
+        padding: 2
       }, function(){
-        // 刪除添加的照片
-        animateCard.parentNode.removeChild(animateCard);
         starMove(oCartImg, {
-          padding: 2
-        }, function(){
-          starMove(oCartImg, {
-            padding: 0
-          })
+          padding: 0
         })
       })
     }

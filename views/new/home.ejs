@@ -14,7 +14,11 @@
                     <a href="/food/home"><img src="/images/logo_w@svg.svg"/></a>
                     <ul>
                         <li><a href="/food/cartDesktop">訂餐</a></li>
-                        <li><a href=<%= member == '登出' ? "/account/logout" : "/account/login" %>><%= member %></a></li>
+                        <% if(member == '登出') { %>
+                            <li><a id="logoutBtn" href="/account/logout"><%= member %></a></li>
+                        <% } else { %>
+                            <li><a href="/account/login"><%= member %></a></li>
+                        <% } %>
                     </ul>
                     <div class="menu">
                         <img src="/images/menu-svgrepo-com.svg"/>

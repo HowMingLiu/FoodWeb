@@ -67,6 +67,7 @@ router.post('/reg', (req, res) => {
 
 // 退出登入功能
 router.get('/logout', (req, res) => {
+
   req.session.destroy(() => {
     res.clearCookie('username');
     res.render('auth/promptPage', {msg: '登出成功', url: '/food/home'});
