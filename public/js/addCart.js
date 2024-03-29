@@ -14,7 +14,15 @@ export function addCart(shoppingCartData, dataTemp) {
   // 當有購物車有初始資料時
   if(shoppingCartData.length){
     oCart.style.display = "block";
-    oCart.innerHTML = shoppingCartData.length;
+    let cartImgCount = 0;
+    shoppingCartData.forEach(item => {
+      if(item.count){
+        cartImgCount += item.count;
+      } else {
+        cartImgCount++;
+      }
+    })
+    oCart.innerHTML = cartImgCount;
   }
   // 添加點擊事件 - 將商品加入購
   oCard.onclick = function(e){
@@ -28,7 +36,6 @@ export function addCart(shoppingCartData, dataTemp) {
       }
     }
 
-
     let aDivs = oCard.querySelectorAll(".sectionCard .content .card>div");
     for(let i = 0; i < aDivs.length; i++){
       aDivs[i].index = i
@@ -39,12 +46,20 @@ export function addCart(shoppingCartData, dataTemp) {
     if(x.tagName.toLowerCase() == "div" && x.className.toLowerCase() == "card"){
       // 預期 y 為每個卡片的 index
       let y = target.parentNode.parentNode.index;
-      console.log('當前畫面菜單',dataTemp); // 印出當前畫面的菜單
+      // console.log('當前畫面菜單',dataTemp); // 印出當前畫面的菜單
       let  dataTemp2 = JSON.parse(JSON.stringify(dataTemp));// 深拷貝，避免動到原始資料
       shoppingCartData.push(dataTemp2[y + ((nowPage - 1) * 6)]);
       // 購物車右上角的數量
       oCart.style.display = "block";
-      oCart.innerHTML = shoppingCartData.length;
+      let cartImgCount = 0;
+      shoppingCartData.forEach(item => {
+        if(item.count){
+          cartImgCount += item.count;
+        } else {
+          cartImgCount++;
+        }
+      })
+      oCart.innerHTML = cartImgCount;
 
       // 添加動畫
       let animateCard = target.parentNode.parentNode.querySelector("img").cloneNode(true);
@@ -98,6 +113,7 @@ export function addCart(shoppingCartData, dataTemp) {
         oNav.style.display = "none";
         oTable.style.display = "block";
       }
+      // 更新數據庫使用者的購物車
       let user = document.cookie.split("=")[1];
       fetch(`http://127.0.0.1:3000/menu/${user}/shoppingCart`, {
           method: "PATCH",
@@ -106,8 +122,8 @@ export function addCart(shoppingCartData, dataTemp) {
           },
           body: JSON.stringify(shoppingCartData)
         })
-        .then(data => {
-          console.log(data);
+        .catch(err => {
+          console.log(err);
         })
     }
   }

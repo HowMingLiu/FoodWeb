@@ -28,12 +28,15 @@ export function setOption(data, dataOption, dataTemp) {
   oUl.onclick = function(e){
     let target = e.target;
     if(target.nodeName.toUpperCase() == "LI"){
-      // // 切換 card 和 購物車列表 顯示
-      // if(oCard.style.display == "none"){
-      //   oCard.style.display = "flex";
-      //   oNav.style.display = "flex";
-      //   oTable.style.display = "none";
-      // }
+      // 切換 card 和 購物車列表 顯示
+      let oCard = document.querySelector(".sectionCard .content .card"); 
+      let oNav = document.querySelector(".sectionCard .content nav");
+      let oTable = document.querySelector(".sectionCard .content table");
+      if(oCard.style.display == "none"){
+        oCard.style.display = "flex";
+        oNav.style.display = "flex";
+        oTable.style.display = "none";
+      }
       for(let i = 0; i < oLis.length; i++){
         oLis[i].index = i;
         oLis[i].className = "none";
@@ -56,7 +59,7 @@ export function setOption(data, dataOption, dataTemp) {
     dataTemp.length = 0;
     dataTemp.push(...dataOption);
 
-    console.log('當前畫面菜單', dataTemp);
+    // console.log('當前畫面菜單', dataTemp);
 
     // 呼叫分頁函式
     navInit(dataOption, perPage);

@@ -24,7 +24,8 @@ fetch('http://127.0.0.1:3000/menu', {method: "GET"})
       .then(res => {
         // 購物車內的商品
         let shoppingCartData = res.data || [];  // 購物車內的商品
-
+        // console.log(shoppingCartData);
+        
         // 左側分類的選項
         setOption(data, dataOption, dataTemp);
 
@@ -34,6 +35,9 @@ fetch('http://127.0.0.1:3000/menu', {method: "GET"})
         // 將菜單加入購物車
         addCart(shoppingCartData, dataTemp);
       })
+  })
+  .catch(err => {
+    console.log(err);
   })
 
 

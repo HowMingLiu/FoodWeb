@@ -8,11 +8,14 @@ export function search(dataOption, dataTemp) {
   let oSearch = document.querySelector(".sectionCard .top #filterInput");
   oSearch.onchange = function(){
     // // 切換 card 和 購物車列表 顯示
-    // if(oCard.style.display == "none"){
-    //   oCard.style.display = "flex";
-    //   oNav.style.display = "flex";
-    //   oTable.style.display = "none";
-    // }
+    let oCard = document.querySelector(".sectionCard .content .card"); 
+    let oNav = document.querySelector(".sectionCard .content nav");
+    let oTable = document.querySelector(".sectionCard .content table");
+    if(oCard.style.display == "none"){
+      oCard.style.display = "flex";
+      oNav.style.display = "flex";
+      oTable.style.display = "none";
+    }
 
     // 搜尋功能
     let keyWord = oSearch.value

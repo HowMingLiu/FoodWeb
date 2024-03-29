@@ -6,7 +6,8 @@
 export function setTable(tableDOM, shoppingCartData){
 
   let tableData = dataOrg(shoppingCartData)
-  console.log('當前購買車清單', tableData);
+  // console.log('當前購買車清單', tableData);
+  // 產生結帳菜單列表
   createTable(tableDOM, tableData);
   createBtn(tableDOM, tableData);
 
@@ -20,7 +21,6 @@ export function setTable(tableDOM, shoppingCartData){
         for(let j = 0; j < shoppingCartData.length; j++){
           if(tableData[i/2].title == shoppingCartData[j].title){
             if(shoppingCartData[j].count == 0){
-              console.log('test')
               shoppingCartData.splice(j, 1);
             }
             break;
@@ -45,15 +45,35 @@ export function setTable(tableDOM, shoppingCartData){
         let oCard = document.querySelector(".sectionCard .content .card");
         let oNav = document.querySelector(".sectionCard .content nav");
         let oTable = document.querySelector(".sectionCard .content table");
-        oCart.innerHTML = shoppingCartData.length;
+        let cartImgCount = 0;
+        shoppingCartData.forEach(item => {
+          if(item.count){
+            cartImgCount += item.count;
+          } else {
+            cartImgCount++;
+          }
+        })
+        // 購物車沒資料時會跳回選菜單頁面
+        oCart.innerHTML = cartImgCount;
         if(oCart.innerHTML == "0"){
           oCart.innerHTML = ""
           oCart.style.display = "none"
           oCard.style.display = "flex";
           oNav.style.display = "flex";
           oTable.style.display = "none";
+          // 更新數據庫使用者的購物車
+        let user = document.cookie.split("=")[1];
+        fetch(`http://127.0.0.1:3000/menu/${user}/shoppingCart`, {
+            method: "PATCH",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(shoppingCartData)
+          })
+          .catch(err => {
+            console.log(err);
+          })
         }
-        console.log(tableData);
         return tableData;
       }
     }else{
@@ -72,8 +92,15 @@ export function setTable(tableDOM, shoppingCartData){
         oTotal.innerHTML = parseInt(oTotal.innerHTML) + parseInt(tableData[(i + 1) / 2 - 1].price*tableData[(i + 1) / 2 - 1].discountOff);
         // 購物車圖示右上角的數字
         let oCart = document.querySelector(".sectionCard .top .shoppingCart span");
-        oCart.innerHTML = shoppingCartData.length;
-        console.log(tableData);
+        let cartImgCount = 0;
+        shoppingCartData.forEach(item => {
+          if(item.count){
+            cartImgCount += item.count;
+          } else {
+            cartImgCount++;
+          }
+        })
+        oCart.innerHTML = cartImgCount;
         return tableData;
       }
     }
@@ -124,9 +151,8 @@ function dataOrg(shoppingCartData){
   shoppingCartData.length = 0;
   shoppingCartData.push(...dataShoppingCount);
 
-
-  console.log('當前購物車列表', dataShoppingCount);
-  console.log('調整完', shoppingCartData);
+  // console.log('當前購物車列表', dataShoppingCount);
+  // console.log('調整完', shoppingCartData);
 
   return dataShoppingCount;
 }
