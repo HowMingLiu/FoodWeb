@@ -10,6 +10,13 @@ fetch(`${APIURL}menu`, {method: "GET"})
   .then(res => {
     let data = res.data;
 
+     // 排序列表
+      data.sort((x ,y) => {
+        let a = x.title.slice(6);
+        let b = y.title.slice(6);
+        return a - b;
+      })
+
     // 左側 option 使用
     let dataOption = [...data];
     // 購物車使用，此為當前畫面對應的 card
@@ -26,7 +33,7 @@ fetch(`${APIURL}menu`, {method: "GET"})
         // 購物車內的商品
         let shoppingCartData = res.data || [];  // 購物車內的商品
         // console.log(shoppingCartData);
-        
+
         // 左側分類的選項
         setOption(data, dataOption, dataTemp);
 
