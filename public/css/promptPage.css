@@ -1,0 +1,8 @@
+.container{
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 40px;
+  color: green;
+  background: rgb(221, 255, 221);
+  padding: 10px 20px;
+}
