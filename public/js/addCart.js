@@ -31,7 +31,7 @@ export function addCart(shoppingCartData, dataTemp) {
     if(!document.cookie.split("=")[1]){
       let loginReply = confirm("登入後即可操作");
       if(loginReply){
-        window.location.replace(`${APIURL}/account/login`);
+        window.location.replace(`${APIURL}account/login`);
       }else {
         return;
       }
