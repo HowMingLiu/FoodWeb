@@ -16,7 +16,7 @@ const menuRouter = require('./routes/api/menu');
 const app = express();
 
 // session 導入
-const {DBHOST, DBPORT, DBNAME} = require('./config/config');
+const {DBURI} = require('./config/config');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 // session 設置
@@ -26,7 +26,7 @@ app.use(session({
   saveUninitialized: false, // 是否為每次的請求都設置一個 cookie 用來存儲 session 的 id
   resave: true, // 是否在每次請求時重新保存 session
   store: MongoStore.create({
-    mongoUrl: `mongodb://${DBHOST}:${DBPORT}/${DBNAME}` // 數據庫連接配置
+    mongoUrl: DBURI // 數據庫連接配置
   }),
   cookie: {
     httpOnly: true, // 開啟後前端無法通過 JS 操作

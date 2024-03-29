@@ -4,13 +4,13 @@ module.exports = function (success, error) {
       console.log('連接失敗')
     }
   }
-
+  const uri = "mongodb+srv://root:root123@mycluster.othjuo7.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster"
   const  mongoose = require('mongoose');
-  const {DBHOST, DBPORT, DBNAME} = require('../config/config');
 
-  mongoose.connect(`mongodb://${DBHOST}:${DBPORT}/${DBNAME}`);
+  mongoose.connect(uri);
 
   mongoose.connection.once('open', () => {
+
     success();
   })
   mongoose.connection.on('error', () => {
