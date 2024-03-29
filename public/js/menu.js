@@ -1,5 +1,6 @@
 import { APIURL } from "./APIconfig.js";
 
+
 // 首頁 menu 選項
 let oMenu = document.querySelector(".menu");
 let oUl = document.querySelector(".logo ul");
@@ -27,6 +28,16 @@ if(oLogout){
     e.preventDefault();
     let reply = confirm("您是否要登出？");
       if(reply){
+        fetch(`${APIURL}menu/${user}/shoppingCart`, {
+          method: "PATCH",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(shoppingCartData)
+        })
+        .catch(err => {
+          console.log(err);
+        })
         window.location.replace(`${APIURL}account/logout`);
       }else {
         return;

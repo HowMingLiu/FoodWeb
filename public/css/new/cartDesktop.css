@@ -192,7 +192,10 @@
 .sectionCard .content .card div .del{
   font-size: 20px;
   margin: 20px 0;
-  text-decoration: line-through red;
+  text-decoration-line: line-through;
+  -webkit-text-decoration-line: line-through;
+  text-decoration-color: red;
+  -webkit-text-decoration-color: red;
 }
 .sectionCard .content .card div .discountPrice{
   font-size: 24px;
