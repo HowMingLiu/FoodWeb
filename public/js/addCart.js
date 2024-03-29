@@ -1,7 +1,7 @@
 import { starMove } from './starMove.js'
 import { nowPage } from './pagenation.js';
 import { setTable } from './table.js';
-import { APIURL } from "../../config/APIconfig.js";
+import { APIURL } from "./APIconfig.js";
 // 將菜單加入購物車
 // 參數：
 //    shoppingCartData  購物車內的商品

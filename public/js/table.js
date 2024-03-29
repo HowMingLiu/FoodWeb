@@ -1,4 +1,4 @@
-import { APIURL } from "../../config/APIconfig.js";
+import { APIURL } from "./APIconfig.js";
 // 產生結帳菜單列表
 // 參數：
 //    tableDOM          要操作的 dom
