@@ -1,7 +1,7 @@
 import { setOption } from './option.js';
 import { search } from './search.js';
 import { addCart } from './addCart.js';
-import { APIURL } from "../../config/config";
+import { APIURL } from "../../config/APIconfig.js";
 
 fetch(`${APIURL}menu`, {method: "GET"})
   .then(res => {

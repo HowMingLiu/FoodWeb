@@ -1,4 +1,4 @@
-import { APIURL } from "../../config/config";
+import { APIURL } from "../../config/APIconfig.js";
 let card = [];
 
 let nowPage = 1;
