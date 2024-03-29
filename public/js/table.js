@@ -1,8 +1,8 @@
+import { APIURL } from "../../config/config";
 // 產生結帳菜單列表
 // 參數：
 //    tableDOM          要操作的 dom
 //    shoppingCartData  購物車內的商品
-
 export function setTable(tableDOM, shoppingCartData){
 
   let tableData = dataOrg(shoppingCartData)
@@ -63,7 +63,7 @@ export function setTable(tableDOM, shoppingCartData){
           oTable.style.display = "none";
           // 更新數據庫使用者的購物車
         let user = document.cookie.split("=")[1];
-        fetch(`http://127.0.0.1:3000/menu/${user}/shoppingCart`, {
+        fetch(`${APIURL}menu/${user}/shoppingCart`, {
             method: "PATCH",
             headers: {
               'Content-Type': 'application/json'

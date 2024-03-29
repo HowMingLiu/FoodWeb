@@ -1,6 +1,7 @@
 import { starMove } from './starMove.js'
 import { nowPage } from './pagenation.js';
 import { setTable } from './table.js';
+import { APIURL } from "../../config/config";
 // 將菜單加入購物車
 // 參數：
 //    shoppingCartData  購物車內的商品
@@ -30,7 +31,7 @@ export function addCart(shoppingCartData, dataTemp) {
     if(!document.cookie.split("=")[1]){
       let loginReply = confirm("登入後即可操作");
       if(loginReply){
-        window.location.replace("http://127.0.0.1:3000/account/login");
+        window.location.replace(`${APIURL}/account/login`);
       }else {
         return;
       }
@@ -115,7 +116,7 @@ export function addCart(shoppingCartData, dataTemp) {
       }
       // 更新數據庫使用者的購物車
       let user = document.cookie.split("=")[1];
-      fetch(`http://127.0.0.1:3000/menu/${user}/shoppingCart`, {
+      fetch(`${APIURL}menu/${user}/shoppingCart`, {
           method: "PATCH",
           headers: {
             'Content-Type': 'application/json'

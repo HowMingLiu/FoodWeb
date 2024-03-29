@@ -1,8 +1,9 @@
 import { setOption } from './option.js';
 import { search } from './search.js';
 import { addCart } from './addCart.js';
+import { APIURL } from "../../config/config";
 
-fetch('http://127.0.0.1:3000/menu', {method: "GET"})
+fetch(`${APIURL}menu`, {method: "GET"})
   .then(res => {
     return res.json();
   })
@@ -17,7 +18,7 @@ fetch('http://127.0.0.1:3000/menu', {method: "GET"})
     // 抓取使用者
     let user = document.cookie.split("=")[1];
 
-    fetch(`http://127.0.0.1:3000/menu/${user}`, {method: "GET"})
+    fetch(`${APIURL}menu/${user}`, {method: "GET"})
       .then(res => {
         return res.json();
       })
@@ -25,7 +26,7 @@ fetch('http://127.0.0.1:3000/menu', {method: "GET"})
         // 購物車內的商品
         let shoppingCartData = res.data || [];  // 購物車內的商品
         // console.log(shoppingCartData);
-        
+
         // 左側分類的選項
         setOption(data, dataOption, dataTemp);
 

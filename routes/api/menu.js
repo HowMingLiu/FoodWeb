@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const MenuModel = require('../../models/MenuModel');
 const UserModel = require('../../models/UserModel');
-const checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware');
-
 // /menu
 // 獲取全部菜單
 router.get('/', (req, res) => {

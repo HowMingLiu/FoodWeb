@@ -1,3 +1,4 @@
+import { APIURL } from "../../config/config";
 let card = [];
 
 let nowPage = 1;
@@ -11,7 +12,7 @@ const oNav = document.querySelector("nav");
 // 設定當前頁數
 const {getPage, setPage} = pageData(1)
 
-fetch('http://127.0.0.1:3000/menu', {method: "GET"})
+fetch(`${APIURL}menu`, {method: "GET"})
     .then(res => {
         return res.json();
     })
