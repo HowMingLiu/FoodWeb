@@ -5,6 +5,7 @@ const UserModel = require('../../models/UserModel');
 // /menu
 // 獲取全部菜單
 router.get('/', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:5500/cartDesktop.html');
   MenuModel.find()
     .then(data => {
       res.json({
