@@ -5,7 +5,7 @@ const UserModel = require('../../models/UserModel');
 // /menu
 // 獲取全部菜單
 router.get('/', (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:5500/cartDesktop.html');
+  res.set('Access-Control-Allow-Origin', '*');
   MenuModel.find()
     .then(data => {
       res.json({
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:user', (req, res) => {
-
+  res.set('Access-Control-Allow-Origin', '*');
   UserModel.find({username: req.params.user})
     .then(data => {
       res.json({
@@ -36,6 +36,7 @@ router.get('/:user', (req, res) => {
 });
 
 router.patch('/:user/shoppingCart', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   UserModel.updateOne({username: req.params.user}, {shoppingCart: req.body})
     .then(data => {
       return UserModel.find({username: req.params.user})
