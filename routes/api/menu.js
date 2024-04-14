@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
   MenuModel.find()
     .then(data => {
       res.json({
-        code: '0000',
-        msg: '獲取成功',
+        code: '0001',
+        msg: '總菜單獲取成功',
         data: data
       });
     })
@@ -18,11 +18,14 @@ router.get('/', (req, res) => {
 
 router.get('/:user', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
-  UserModel.find({username: req.params.user})
+  let username = req.params.user.split("&")[0];
+  let password = req.params.user.split("&")[1];
+  
+  UserModel.find({username: username, password: password})
     .then(data => {
       res.json({
-        code: '0000',
-        msg: '獲取成功',
+        code: '0002',
+        msg: '個人購物車獲取成功',
         data: data[0].shoppingCart
       });
     })
@@ -37,18 +40,36 @@ router.get('/:user', (req, res) => {
 
 router.patch('/:user/shoppingCart', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
-  UserModel.updateOne({username: req.params.user}, {shoppingCart: req.body})
+  let username = req.params.user.split("&")[0];
+  let password = req.params.user.split("&")[1];
+
+  UserModel.updateOne({username: username, password: password}, {shoppingCart: req.body})
     .then(data => {
-      return UserModel.find({username: req.params.user})
+      return UserModel.find({username: username, password: password})
     })
     .then(data => {
       res.json({
-        code: '0000',
-        msg: '更新成功',
+        code: '0003',
+        msg: '個人購物車更新成功',
         data: data[0].shoppingCart
       });
     })
+    .catch(err => {
+      return res.json({
+        code: '1004',
+        msg: '個人購物車更新失敗',
+        data: null
+      });
+    })
 });
+
+// 處理 preflight 
+router.options('/:user/shoppingCart', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PATCH')
+  res.header('Access-Control-Allow-Headers', 'content-type')
+  res.end()
+})
 
 
 module.exports = router;

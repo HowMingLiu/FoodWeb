@@ -4,13 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// 路由導入
-const indexRouter = require('./routes/web/index');
-const foodRouter = require('./routes/web/home');
-const accountRouter = require('./routes/web/auth/account');
-
 // API 路由
-const menuRouter = require('./routes/api/menu');
+const menuRouterAPI = require('./routes/api/menu');
+const accountRouterAPI = require('./routes/api/account');
 
 
 const app = express();
@@ -45,14 +41,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 設置路由
-app.use('/', indexRouter);
-app.use('/food', foodRouter);
-app.use('/account', accountRouter);
-
 // 設置 API 路由
-app.use('/menu', menuRouter);
-
+app.use('/menu', menuRouterAPI);
+app.use('/accountAPI', accountRouterAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
